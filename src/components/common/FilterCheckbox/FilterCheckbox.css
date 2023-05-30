@@ -1,0 +1,53 @@
+.FilterCheckbox {
+    display: flex;
+    flex-direction: row;
+    gap: 13px;
+    margin-top: 30px;
+}
+
+.FilterCheckbox__span {
+    font-family: "Inter", "Arial", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+}
+
+.FilterCheckbox__hidden {
+    display: none;
+}
+
+.FilterCheckbox__hidden:checked~.FilterCheckbox__visible {
+    background-color: #2BE080;
+}
+
+.FilterCheckbox__hidden:checked~.FilterCheckbox__visible::before {
+    background-color: #FFFFFF;
+    left: 18px;
+    transition: left .3s ease-in-out;
+}
+
+.FilterCheckbox__visible {
+    position: relative;
+    background-color: #EBEBEB;
+    width: 36px;
+    height: 20px;
+    border-radius: 36px;
+}
+
+.FilterCheckbox__visible:hover {
+    filter: brightness(0.95);
+}
+
+.FilterCheckbox__visible::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 16px;
+    width: 16px;
+    background-color: #F5F5F5;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: left .3s ease-in-out;
+}
