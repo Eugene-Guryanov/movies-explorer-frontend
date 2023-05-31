@@ -1,5 +1,6 @@
 .portfolio {
   margin: 70px 14px;
+  font-family: "Inter", "Arial", sans-serif;
 }
 
 @media screen and (min-width: 580px) {
@@ -40,7 +41,8 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 28px;
-
+  color: #000000;
+  text-decoration: none;
   letter-spacing: -0.04em;
 }
 

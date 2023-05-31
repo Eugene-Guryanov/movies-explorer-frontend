@@ -16,7 +16,9 @@ function Header(loggedIn) {
       {loggedIn && (location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile') ? (
         <header className="header header_type_loggedin">
           <div className="header__container">
-            <img className="header__logo" src={logo} />
+          <Link to="/" className="logo-link button-hover">
+            <img className="header__logo" src={logo}  alt="логотип"/>
+            </Link>
             <Link className="header__button header__button_type_loggedIn button-active button-hover" to='/movies'>
               Фильмы
             </Link>
@@ -32,7 +34,9 @@ function Header(loggedIn) {
       ) : (
         <>
           <header className="header">
-            <img className="header__logo" src={logo} />
+          <Link to="/" className="logo-link button-hover">
+            <img className="header__logo" src={logo} alt="логотип"/>
+            </Link>
             <div className="header__container">
               <Link
                 className="header__button header__button_type_signup button-hover"

@@ -1,4 +1,4 @@
-.BurgerMenu {
+.burger-menu {
   background: #ffffff;
   z-index: 2;
   width: 100vw;
@@ -13,12 +13,12 @@
 
 
 @media screen and (min-width: 768px) {
-  .BurgerMenu {
+  .burger-menu {
     background: linear-gradient(to left, #ffffff 70%, rgba(0, 0, 0, .3)  70%);
   }
 }
 
-.BurgerMenu__btn-close {
+.burger-menu__btn-close {
   width: 22px;
   height: 22px;
   display: flex;
@@ -26,7 +26,7 @@
   margin: 18px 18px 0 0;
 }
 
-.BurgerMenu__container {
+.burger-menu__container {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -35,14 +35,14 @@
 }
 
 @media screen and (min-width: 768px) {
-  .BurgerMenu__container {
+  .burger-menu__container {
     margin: 105px 25% 0 0;
     width: fit-content;
     align-self: flex-end;
   }
 }
 
-.BurgerMenu__btn {
+.burger-menu__btn {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -57,15 +57,15 @@
   color: #000000;
 }
 
-.BurgerMenu__btn:last-child{
+.burger-menu__btn:last-child{
   margin-top: 45vh;
 }
 
-.BurgerMenu__btn-focus:focus {
+.burger-menu__btn-focus:focus {
   border-bottom: 2px solid #000000;
 }
 
-.BurgerMenu__btn-account {
+.burger-menu__btn-account {
   text-decoration: none;
   background: #f9f9f9;
   border-radius: 20px;
@@ -74,12 +74,12 @@
 }
 
 @media screen and (min-width: 768px) {
-  .BurgerMenu__btn-account {
+  .burger-menu__btn-account {
     width: fit-content;
     align-self: flex-end;
   }
 }
 
-.BurgerMenu__open {
+.burger-menu__open {
   display: flex;
 }

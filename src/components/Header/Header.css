@@ -14,13 +14,13 @@
   background: #f3c1f8;
 }
 
-@media screen and (min-width: 580px) {
+@media screen and (min-width: 768px) {
   .header {
     padding: 25px 30px;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) {
   .header {
     padding: 21px 70px;
   }
@@ -47,7 +47,7 @@
   outline: none;
   text-decoration: none;
   background: none;
-
+  color: #000000;
 }
 
 .header__button_type_signup {
@@ -79,13 +79,13 @@
 
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 768px) {
   .header__button_type_account {
     display: none;
   }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 768px) {
   .header__button_type_loggedIn {
     display: none;
   }
@@ -107,6 +107,12 @@
   left: 9px;
 }
 
+@media screen and (min-width: 769px) {
+  .header__burger {
+    display: none;
+  }
+}
+
 
 .header__burger-button::after {
   width: 22px;
@@ -124,10 +130,4 @@
   background: #000000;
   transform: translateY(6.5px);
   content: "";
-}
-
-@media screen and (min-width: 1200px) {
-  .header__burger {
-    display: none;
-  }
 }

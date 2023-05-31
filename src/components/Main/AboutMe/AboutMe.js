@@ -19,7 +19,7 @@ function AboutMe() {
             После того, как прошёл курс по веб-разработке, начал заниматься
             фриланс-заказами и ушёл с постоянной работы.
           </div>
-          <a className="about-me__github" href="https://github.com/Eugene-Guryanov">github</a>
+          <a className="about-me__github button-hover" href="https://github.com/Eugene-Guryanov">github</a>
         </div>
       </div>
     </section>

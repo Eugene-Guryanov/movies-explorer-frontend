@@ -2,10 +2,10 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox() {
 return(
-    <label className='FilterCheckbox'>
-<input type='checkbox' className='FilterCheckbox__hidden'/>
-<div className='FilterCheckbox__visible'></div>
-<span className='FilterCheckbox__span'>Короткометражки</span>
+    <label className='filter-checkbox'>
+<input type='checkbox' className='filter-checkbox__hidden'/>
+<div className='filter-checkbox__visible'></div>
+<span className='filter-checkbox__span'>Короткометражки</span>
     </label>
 )
 }

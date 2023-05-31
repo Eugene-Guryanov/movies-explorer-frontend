@@ -12,7 +12,7 @@ function Register() {
 
     <div className="register">
       <Link to="/" className="register__logo-link">
-        <img src={logoPath} alt="Логотип сайта" className="register__logo" />
+        <img src={logoPath} alt="Логотип" className="register__logo" />
       </Link>
       <h1 className="register__title">Добро пожаловать!</h1>
 

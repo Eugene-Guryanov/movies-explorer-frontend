@@ -33,7 +33,7 @@ function Login() {
   return (
     <div className="login">
       <Link to="/" className="login__logo-link">
-        <img src={logo} alt="Логотип сайта" className="login__logo" />
+        <img src={logo} alt="Логотип" className="login__logo" />
       </Link>
       <h1 className="login__title">Рады видеть!</h1>
 

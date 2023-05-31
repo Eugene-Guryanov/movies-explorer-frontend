@@ -3,6 +3,7 @@
   width: 100%;
   box-sizing: border-box;
   padding: 60px 10px 10px;
+  font-family: "Inter", "Arial", sans-serif;
 }
 
 @media screen and (min-width: 768px) {
