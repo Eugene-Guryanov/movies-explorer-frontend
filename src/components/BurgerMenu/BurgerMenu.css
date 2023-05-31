@@ -14,7 +14,7 @@
 
 @media screen and (min-width: 768px) {
   .burger-menu {
-    background: linear-gradient(to left, #ffffff 70%, rgba(0, 0, 0, .3)  70%);
+    background: linear-gradient(to left, #ffffff 70%, rgba(0, 0, 0, .3) 70%);
   }
 }
 
@@ -57,7 +57,7 @@
   color: #000000;
 }
 
-.burger-menu__btn:last-child{
+.burger-menu__btn:last-child {
   margin-top: 45vh;
 }
 

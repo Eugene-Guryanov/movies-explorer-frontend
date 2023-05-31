@@ -1,4 +1,4 @@
-.page404 {
+.page-404 {
   display: flex;
   flex-direction: column;
   vertical-align: middle;
@@ -7,7 +7,7 @@
   font-family: "Inter", "Arial", sans-serif;
 }
 
-.page404__title-wrapper {
+.page-404__title-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 580px) {
-  .page404__title-wrapper {
+  .page-404__title-wrapper {
     justify-content: flex-end;
     max-height: 740px;
     margin: 408px 0 184px;
@@ -25,13 +25,13 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .page404__title-wrapper {
+  .page-404__title-wrapper {
     max-height: 578px;
     margin-top: 246px;
   }
 }
 
-.page404__title {
+.page-404__title {
   font-weight: 400;
   font-size: 80px;
   line-height: 97px;
@@ -40,14 +40,14 @@
 }
 
 @media screen and (min-width: 580px) {
-  .page404__title {
+  .page-404__title {
     font-size: 140px;
     line-height: 169px;
     margin-bottom: 5px;
   }
 }
 
-.page404__subtitle {
+.page-404__subtitle {
   font-size: 12px;
   line-height: 15px;
   text-align: center;
@@ -55,13 +55,13 @@
 }
 
 @media screen and (min-width: 580px) {
-  .page404__subtitle {
+  .page-404__subtitle {
     font-size: 16px;
     line-height: 19px;
   }
 }
 
-.page404__back-btn {
+.page-404__back-btn {
   justify-self: center;
   border: none;
   padding: 0;
@@ -74,12 +74,12 @@
 }
 
 @media screen and (min-width: 580px) {
-  .page404__back-btn {
+  .page-404__back-btn {
     font-size: 14px;
     line-height: 17px;
   }
 }
 
-.page404__back-btn:hover {
+.page-404__back-btn:hover {
   opacity: 0.8;
 }

@@ -9,11 +9,11 @@ function Page404() {
   return (
 
     <div className="page404">
-      <div className="page404__title-wrapper">
-        <h1 className="page404__title">404</h1>
-        <p className="page404__subtitle">Страница не найдена</p>
+      <div className="page-404__title-wrapper">
+        <h1 className="page-404__title">404</h1>
+        <p className="page-404__subtitle">Страница не найдена</p>
       </div>
-      <button type="button" className="page404__back-btn" onClick={() => navigate(-1)}>Назад</button>
+      <button type="button" className="page-404__back-btn" onClick={() => navigate(-1)}>Назад</button>
     </div>
 
   );

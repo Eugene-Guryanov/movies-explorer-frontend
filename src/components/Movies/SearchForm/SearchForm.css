@@ -71,6 +71,6 @@
     }
 }
 
-.search-form__input:focus > .search-form__form-field {
+.search-form__input:focus>.search-form__form-field {
     border-color: #000000;
 }

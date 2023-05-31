@@ -6,7 +6,7 @@ function BurgerMenu(props) {
 
   return (<>
     <div className={`burger-menu ${props.isOpen ? "burger-menu__open" : ""}`}>
-      <img className="burger-menu__btn-close button-hover" src={btnClose} onClick={props.onClose} alt="кнопка закрытия"/>
+      <img className="burger-menu__btn-close button-hover" src={btnClose} onClick={props.onClose} alt="кнопка закрытия" />
       <div className="burger-menu__container">
         <NavLink to='/' className="burger-menu__btn burger-menu__btn-focus button-hover" >Главная</NavLink>
         <NavLink to='/movies' className="burger-menu__btn  burger-menu__btn-focus button-hover">Фильмы</NavLink>

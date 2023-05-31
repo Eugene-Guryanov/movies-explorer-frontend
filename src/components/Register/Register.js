@@ -9,7 +9,6 @@ function Register() {
 
 
   return (
-
     <div className="register">
       <Link to="/" className="register__logo-link">
         <img src={logoPath} alt="Логотип" className="register__logo" />
@@ -68,7 +67,6 @@ function Register() {
       </form>
       <p className="register__footnote">Уже зарегистрированы?&ensp;<Link to="/signin" className="register__footnote-link">Войти</Link></p>
     </div>
-
   );
 };
 
