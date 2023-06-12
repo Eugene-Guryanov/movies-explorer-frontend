@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import { CurrentUserContext } from "../../components/contexts/CurrentUserContext";
 
 import "./App.css";
@@ -34,11 +34,29 @@ function App() {
   const [savedMovies, setSavedMovies] = useState(
     JSON.parse(localStorage.getItem("savedMovies")) || []
   );
-  const [errorData, setErrorData] = useState(false);
   const [Search, setSearch] = useState("");
   const [isShort, setShort] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
+  const path = location.pathname;
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      mainApi
+        .tokenCheck(token)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+          }
+          navigate(path);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
   useEffect(() => {
     async function fetchData() {
       await Promise.all([moviesApi.getMoviesList()])
@@ -62,10 +80,10 @@ function App() {
       .then((res) => {
         localStorage.setItem("token", res.token);
         mainApi.getUserInfo().then((userData) => {
-          console.log(userData);
           setCurrentUser(userData);
+          console.log(userData.currentUser)
           setLoggedIn(true);
-          navigate("/movies");
+         navigate('/movies')
         });
       })
       .catch(async (err) => {
@@ -131,17 +149,14 @@ function App() {
   });
 
   const handleCardLike = async (data) => {
-    setErrorData(false);
     mainApi
       .saveMovie(data)
       .then((res) => {
         const newSavedMovies = [...savedMovies, res];
 
         setSavedMovies(newSavedMovies);
-        localStorage.setItem("savedMovies", JSON.stringify(newSavedMovies));
       })
       .catch((err) => {
-        setErrorData(true);
         console.log(err);
       });
   };
@@ -154,7 +169,6 @@ function App() {
         );
 
         setSavedMovies(newSavedMovies);
-        localStorage.setItem("savedMovies", JSON.stringify(newSavedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -182,7 +196,7 @@ function App() {
           element={
             <ProtectedRoute loggedIn={isLoggedIn}>
               <Header LoggedIn={isLoggedIn} />
-              <SearchForm onChekBox={setShort} onSearchClick={setSearch} />
+              <SearchForm onChekBox={setShort} onSearchClick={setSearch} pageName={'movies'}/>
               <MoviesCardList
                 filteredMovies={isShort ? shortMovie : filteredMovies}
                 savedMovies={savedMovies}

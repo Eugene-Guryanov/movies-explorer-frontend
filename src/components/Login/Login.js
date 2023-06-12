@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { NameRegExp } from "../../utils/const";
 import { EmailRegExp } from "../../utils/const";
 
 import logo from "../../images/logo__COLOR_main.svg";
@@ -64,7 +63,7 @@ function Login({ onLogin, serverMessage }) {
               name="password"
               {...register("password", {
                 required: "Необходимо ввести пароль",
-                minLength: { value: "5", message: "слишком короткий пароль" },
+                minLength: { value: "3", message: "слишком короткий пароль" },
                 maxLength: { value: "50", message: "слишком длинный пароль" },
               })}
             />

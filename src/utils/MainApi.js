@@ -69,7 +69,8 @@ class MainApi {
                 thumbnail: `https://api.nomoreparties.co/${data.image.formats.thumbnail.url}`,
                 movieId: data.id,
                 nameRU: data.nameRU,
-                nameEN: data.nameEN,}),
+                nameEN: data.nameEN,
+            }),
         }).then(this._checkPromise);
     }
 
@@ -79,6 +80,16 @@ class MainApi {
             headers: { ...this._headers, authorization: `Bearer ${localStorage.getItem('token')}` },
         }).then(this._checkPromise);
     }
+    tokenCheck(token) {
+        return fetch(`${this._baseUrl}users/me`, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(this._checkPromise);
+    };
 
 }
 

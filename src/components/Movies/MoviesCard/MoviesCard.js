@@ -1,12 +1,10 @@
 import deleted from "../../../images/delete.svg";
 import { useLocation } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useState, useEffect } from "react";
 import "./MoviesCard.css";
 
 function MoviesCard({ movie, handleLikeClick, handleCardDelete, savedMovies }) {
   const location = useLocation();
-  const currentUser = useContext(CurrentUserContext);
   const [save, setSave] = useState(false);
   function getTimeFromMins(mins, movie) {
     let hours = Math.trunc(mins / 60);
@@ -37,7 +35,7 @@ function MoviesCard({ movie, handleLikeClick, handleCardDelete, savedMovies }) {
   }
 
   const cardSaveButtonClassName = `${
-    currentUser._id === movie.owner && save
+     save
       ? "movie__like-btn card__like-btn_active"
       : "movie__like-btn"
   }`;
@@ -67,13 +65,13 @@ function MoviesCard({ movie, handleLikeClick, handleCardDelete, savedMovies }) {
             <button
               type="button"
               aria-label='Отметка "Сохранить"'
-              className={cardSaveButtonClassName}
+              className={`${cardSaveButtonClassName} button-hover`}
               onClick={handleClick}
             ></button>
           )}
           {location.pathname === "/saved-movies" && (
             <img
-              className="movie__btn-image"
+              className="movie__btn-image button-hover"
               src={deleted}
               alt="Удалить"
               onClick={handleClickDeleteCard}
