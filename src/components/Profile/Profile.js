@@ -88,7 +88,7 @@ function Profile({ onUpdateUser, onSignOut, message, currentUser }) {
           type="submit"
           className={
             isValid &&
-            (currentUser.email !== emailValue || currentUser.name !== nameValue)
+              (currentUser.email !== emailValue || currentUser.name !== nameValue)
               ? "profile__submit-btn button-hover"
               : "profile__submit-btn button-hover button-disable"
           }

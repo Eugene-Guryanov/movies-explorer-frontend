@@ -71,7 +71,7 @@ function Register({ onRegister, serverMessage }) {
               name="password"
 
               {...(register('password', {
-                required: 'Необходимо ввести пароль', minLength: { value: "5", message: 'слишком короткий пароль' },
+                required: 'Необходимо ввести пароль', minLength: { value: "3", message: 'слишком короткий пароль' },
                 maxLength: { value: "50", message: 'слишком длинный пароль' }
               }))}
             />

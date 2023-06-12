@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import { Route, Routes, json, useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../components/contexts/CurrentUserContext";
 
 import "./App.css";
@@ -31,9 +31,7 @@ function App() {
     text: "",
     isError: null,
   });
-  const [savedMovies, setSavedMovies] = useState(
-    JSON.parse(localStorage.getItem("savedMovies")) || []
-  );
+  const [savedMovies, setSavedMovies] = useState([]);
   const [Search, setSearch] = useState("");
   const [isShort, setShort] = useState(false);
   const [message, setMessage] = useState("");
@@ -57,6 +55,8 @@ function App() {
         });
     }
   }, []);
+
+  
   useEffect(() => {
     async function fetchData() {
       await Promise.all([moviesApi.getMoviesList()])
@@ -83,7 +83,7 @@ function App() {
           setCurrentUser(userData);
           console.log(userData.currentUser)
           setLoggedIn(true);
-         navigate('/movies')
+          navigate('/movies')
         });
       })
       .catch(async (err) => {
@@ -136,7 +136,7 @@ function App() {
   ).filter((movie) => {
     return movie.nameRU
       .toLocaleLowerCase()
-      .includes(Search.toLocaleLowerCase());
+      .includes((Search).toLocaleLowerCase());
   });
   const shortMovie = (
     location.pathname === "/saved-movies" ? savedMovies : apiMovie
@@ -196,7 +196,7 @@ function App() {
           element={
             <ProtectedRoute loggedIn={isLoggedIn}>
               <Header LoggedIn={isLoggedIn} />
-              <SearchForm onChekBox={setShort} onSearchClick={setSearch} pageName={'movies'}/>
+              <SearchForm onChekBox={setShort} onSearchClick={setSearch} pageName={'movies'} />
               <MoviesCardList
                 filteredMovies={isShort ? shortMovie : filteredMovies}
                 savedMovies={savedMovies}
