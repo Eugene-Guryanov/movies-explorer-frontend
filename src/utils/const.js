@@ -1,4 +1,4 @@
-export const MAIN_API_BASE_URL = 'https://ges.nomoredomains.monster/api/';
+export const MAIN_API_BASE_URL = 'https://ges.nomoredomains.monster/';
 
 export const MOVIES_API_BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies/';
 
