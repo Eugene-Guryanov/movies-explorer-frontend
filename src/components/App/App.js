@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, json, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../components/contexts/CurrentUserContext";
 
 import "./App.css";
@@ -24,7 +24,7 @@ import moviesApi from "../../utils/MoviesApi";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('profile')) || '');
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [apiMovie, setApiMovie] = useState(localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []);
   const [serverMessage, setServerMessage] = useState({
@@ -37,7 +37,8 @@ function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   const path = location.pathname;
-
+  localStorage.setItem('profile', JSON.stringify(currentUser))
+  console.log(currentUser)
   useEffect(() => {
     const token = localStorage.getItem('token');
 

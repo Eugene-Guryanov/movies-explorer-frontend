@@ -1,4 +1,5 @@
 import { React, useState } from "react";
+
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { NameRegExp } from "../../utils/const";
@@ -7,7 +8,7 @@ import "./Profile.css";
 
 function Profile({ onUpdateUser, onSignOut, message, currentUser }) {
   const [emailValue, setEmailValue] = useState(currentUser.email);
-  const [nameValue, setNameValue] = useState(currentUser.name);
+  const [nameValue, setNameValue] = useState(currentUser.name );
   const [isMessage, setMessage] = useState(false);
   const {
     register,
@@ -29,7 +30,7 @@ function Profile({ onUpdateUser, onSignOut, message, currentUser }) {
 
   return (
     <div className="profile">
-      <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
+      <h1 className="profile__title">{`Привет, ${ currentUser.name }!`}</h1>
 
       <form
         className="profile__form"
