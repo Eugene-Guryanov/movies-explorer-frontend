@@ -2,28 +2,31 @@ import "./SearchForm.css";
 import FilterCheckbox from "../../common/FilterCheckbox/FilterCheckbox";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useEffect } from "react";
 
 function SearchForm({ onChekBox, onSearchClick }) {
   const { handleSubmit } = useForm({ mode: "onChange" });
-  const [value, setValue] = useState(JSON.parse(localStorage.getItem('value')) ||"");
+  const [isError, setError] = useState(false);
+  const [value, setValue] = useState(JSON.parse(localStorage.getItem('value')) || "");
   function onSearch() {
-    onSearchClick(value);
+    if (value.length === 0) {
+      setError(true);
+    } else {
+      setError(false);
+      onSearchClick(value);
+    }
   }
-  function onChange (e){
+  function onChange(e) {
     setValue(e.target.value)
-    localStorage.setItem('value',  JSON.stringify(e.target.value))
+    localStorage.setItem('value', JSON.stringify(e.target.value))
   }
-  useEffect(()=>{
-    onSearch()
-  }, [value])
+
+
   return (
     <form className="search-form" onSubmit={handleSubmit(onSearch)}>
       <label className="search-form__form-field">
         <input
           className="search-form__input"
           placeholder="Поиск"
-          required
           onChange={onChange}
           value={value ? value : ''}
         />
@@ -35,6 +38,7 @@ function SearchForm({ onChekBox, onSearchClick }) {
         </button>
       </label>
       <FilterCheckbox onChekBox={onChekBox} />
+      {isError ? <span className="search__form-error">Нужно ввести ключевое слово</span> : ''}
     </form>
   );
 }

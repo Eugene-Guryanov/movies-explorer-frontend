@@ -26,7 +26,7 @@ function App() {
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState();
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [apiMovie, setApiMovie] = useState([]);
+  const [apiMovie, setApiMovie] = useState(localStorage.getItem('movies') ? JSON.parse(localStorage.getItem('movies')) : []);
   const [serverMessage, setServerMessage] = useState({
     text: "",
     isError: null,
@@ -55,24 +55,24 @@ function App() {
         });
     }
   }, []);
-
-  
   useEffect(() => {
-    async function fetchData() {
-      await Promise.all([moviesApi.getMoviesList()])
-        .then((items) => {
-          setApiMovie(items[0]);
-          setError(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setError(true);
-        });
+    if (!isLoggedIn) {
+      navigate('/');
     }
-    if (isLoggedIn) {
-      fetchData();
-    }
-  }, [isLoggedIn]);
+  }, [isLoggedIn])
+
+  async function fetchData() {
+    await Promise.all([moviesApi.getMoviesList()])
+      .then((items) => {
+        setApiMovie(items[0]);
+        localStorage.setItem('movies', JSON.stringify(items[0]))
+        setError(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(true);
+      });
+  }
 
   function handleLogin(data) {
     mainApi
@@ -81,7 +81,7 @@ function App() {
         localStorage.setItem("token", res.token);
         mainApi.getUserInfo().then((userData) => {
           setCurrentUser(userData);
-          console.log(userData.currentUser)
+          fetchData()
           setLoggedIn(true);
           navigate('/movies')
         });
@@ -128,25 +128,41 @@ function App() {
   }
   function handleSignOut() {
     localStorage.clear();
+    localStorage.removeItem('value');
+    localStorage.removeItem('check');
+    localStorage.removeItem('movies')
+    localStorage.removeItem('filteredMovies')
     setLoggedIn(false);
     setCurrentUser({});
   }
+  const array = [];
+  localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
   const filteredMovies = (
-    location.pathname === "/saved-movies" ? savedMovies : apiMovie
+    location.pathname === "/saved-movies" ? (((JSON.parse(localStorage.getItem('filteredMovies')) !== null ? JSON.parse(localStorage.getItem('filteredMovies')) : array).length !== 0 && (JSON.parse(localStorage.getItem('value')) !== null ? JSON.parse(localStorage.getItem('value')) : array).length !== 0) ? JSON.parse(localStorage.getItem('savedMovies')) : savedMovies) : (((JSON.parse(localStorage.getItem('filteredMovies')) !== null ? JSON.parse(localStorage.getItem('filteredMovies')) : array).length !== 0 && (JSON.parse(localStorage.getItem('value')) !== null ? JSON.parse(localStorage.getItem('value')) : array).length !== 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie)
   ).filter((movie) => {
-    return movie.nameRU
-      .toLocaleLowerCase()
-      .includes((Search).toLocaleLowerCase());
-  });
-  const shortMovie = (
-    location.pathname === "/saved-movies" ? savedMovies : apiMovie
-  ).filter((movie) => {
-    if (movie.duration < 40) {
+    if (isShort) {
+      if (movie.duration < 40) {
+        return movie.nameRU
+          .toLocaleLowerCase()
+          .includes(Search.toLocaleLowerCase());
+      }
+    }
+    else {
       return movie.nameRU
         .toLocaleLowerCase()
-        .includes(Search.toLocaleLowerCase());
+        .includes((Search).toLocaleLowerCase());
     }
   });
+  localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
+  //   const shortMovie = (
+  //  location.pathname === "/saved-movies" ? savedMovies : apiMovie
+  //   ).filter((movie) => {
+  //     if (movie.duration < 40) {
+  //       return movie.nameRU
+  //         .toLocaleLowerCase()
+  //         .includes(Search.toLocaleLowerCase());
+  //     }
+  //   });
 
   const handleCardLike = async (data) => {
     mainApi
@@ -198,7 +214,8 @@ function App() {
               <Header LoggedIn={isLoggedIn} />
               <SearchForm onChekBox={setShort} onSearchClick={setSearch} pageName={'movies'} />
               <MoviesCardList
-                filteredMovies={isShort ? shortMovie : filteredMovies}
+                // filteredMovies={isShort ? shortMovie : filteredMovies}
+                filteredMovies={filteredMovies}
                 savedMovies={savedMovies}
                 handleLikeClick={handleCardLike}
                 handleCardDelete={handleCardDelete}
@@ -215,7 +232,8 @@ function App() {
               <Header LoggedIn={isLoggedIn} />
               <SearchForm onChekBox={setShort} onSearchClick={setSearch} />
               <MoviesCardList
-                filteredMovies={isShort ? shortMovie : filteredMovies}
+                // filteredMovies={isShort ? shortMovie : filteredMovies}
+                filteredMovies={filteredMovies}
                 handleCardDelete={handleCardDelete}
                 savedMovies={savedMovies}
                 error={error}

@@ -21,7 +21,7 @@ function MoviesCardList({
     md: 1000,
     lg: 1280,
   };
-localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
+
   useEffect(() => {
     if (width < breakpoint.sm && filteredMovies.length >= 5) {
       setNumberOfCards(5);
