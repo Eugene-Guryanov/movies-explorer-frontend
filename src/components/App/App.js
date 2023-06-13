@@ -131,8 +131,9 @@ function App() {
     localStorage.clear();
     localStorage.removeItem('value');
     localStorage.removeItem('check');
-    localStorage.removeItem('movies')
-    localStorage.removeItem('filteredMovies')
+    localStorage.removeItem('movies');
+    localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('profile');
     setLoggedIn(false);
     setCurrentUser({});
   }
