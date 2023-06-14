@@ -145,14 +145,14 @@ function App() {
     if (isShort) {
       if (movie.duration < 40) {
         return movie.nameRU
-          .toLocaleLowerCase()
-          .includes(Search.toLocaleLowerCase());
+          .toLowerCase()
+          .startsWith(Search.toLowerCase());
       }
     }
     else {
       return movie.nameRU
-        .toLocaleLowerCase()
-        .includes((Search).toLocaleLowerCase());
+        .toLowerCase()
+        .startsWith((Search).toLowerCase());
     }
   });
   localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
