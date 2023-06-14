@@ -1,14 +1,15 @@
 import deleted from "../../../images/delete.svg";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { minute, hour } from "../../../utils/const";
 import "./MoviesCard.css";
 
 function MoviesCard({ movie, handleLikeClick, handleCardDelete, savedMovies }) {
   const location = useLocation();
   const [save, setSave] = useState(false);
   function getTimeFromMins(mins, movie) {
-    let hours = Math.trunc(mins / 60);
-    let minutes = mins % 60;
+    let hours = Math.trunc(mins / hour);
+    let minutes = mins % minute;
     return hours + "ч " + minutes + "м";
   }
   useEffect(() => {

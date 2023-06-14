@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import MovieCard from "../MoviesCard/MoviesCard";
 import { React, useState, useEffect } from "react";
 import useViewport from "../../common/useViewport";
+import {breakpoint, lengthCard} from '../../../utils/const'
 
 function MoviesCardList({
   filteredMovies,
@@ -14,23 +15,17 @@ function MoviesCardList({
   const location = useLocation();
 
   const { width } = useViewport();
-  const [numberOfCards, setNumberOfCards] = useState(5);
-
-  const breakpoint = {
-    sm: 650,
-    md: 1000,
-    lg: 1280,
-  };
+  const [numberOfCards, setNumberOfCards] = useState(lengthCard.fiveCard);
 
   useEffect(() => {
-    if (width < breakpoint.sm && filteredMovies.length >= 5) {
-      setNumberOfCards(5);
-    } else if (width < breakpoint.md && filteredMovies.length >= 8) {
-      setNumberOfCards(8);
-    } else if (width < breakpoint.lg && filteredMovies.length >= 12) {
-      setNumberOfCards(12);
-    } else if (width >= breakpoint.lg && filteredMovies.length >= 16) {
-      setNumberOfCards(16);
+    if (width < breakpoint.sm && filteredMovies.length >= lengthCard.fiveCard) {
+      setNumberOfCards(lengthCard.fiveCard);
+    } else if (width < breakpoint.md && filteredMovies.length >= lengthCard.eightCard) {
+      setNumberOfCards(lengthCard.eightCard);
+    } else if (width < breakpoint.lg && filteredMovies.length >= lengthCard.twelveСard) {
+      setNumberOfCards(lengthCard.twelveСard);
+    } else if (width >= breakpoint.lg && filteredMovies.length >= lengthCard.sixteen) {
+      setNumberOfCards(lengthCard.sixteen);
     } else {
       setNumberOfCards(filteredMovies.length);
     }
@@ -45,13 +40,13 @@ function MoviesCardList({
   function handleClickMoreButton() {
     setNumberOfCards((amount) => {
       if (width < breakpoint.sm) {
-        return amount + 2;
+        return amount + lengthCard.twoCard;
       } else if (width < breakpoint.md) {
-        return amount + 2;
+        return amount + lengthCard.twoCard;
       } else if (width < breakpoint.lg) {
-        return amount + 3;
+        return amount + lengthCard.threeCard;
       } else if (width >= breakpoint.lg) {
-        return amount + 4;
+        return amount + lengthCard.fourCard;
       }
     });
   }
