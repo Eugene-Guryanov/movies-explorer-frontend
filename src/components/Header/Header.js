@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
-function Header(loggedIn) {
+function Header({loggedIn}) {
   const [isPopupOpen, setPopupOpen] = useState(false);
   function onClose() {
     setPopupOpen(false);
@@ -13,11 +13,9 @@ function Header(loggedIn) {
 
   return (
     <>
-      {loggedIn &&
-      (location.pathname === "/movies" ||
-        location.pathname === "/saved-movies" ||
-        location.pathname === "/profile") ? (
-        <header className="header header_type_loggedin">
+      {loggedIn === true ?
+
+        (<header className="header header_type_loggedin">
           <div className="header__container">
             <Link to="/" className="logo-link button-hover">
               <img className="header__logo" src={logo} alt="логотип" />
@@ -45,30 +43,30 @@ function Header(loggedIn) {
             <span className="header__burger-button button-hover"></span>
           </a>
           <BurgerMenu onClose={onClose} isOpen={isPopupOpen} />
-        </header>
-      ) : (
-        <>
-          <header className="header">
-            <Link to="/" className="logo-link button-hover">
-              <img className="header__logo" src={logo} alt="логотип" />
-            </Link>
-            <div className="header__container">
-              <Link
-                className="header__button header__button_type_signup button-hover"
-                to="/signup"
-              >
-                Регистрация
+        </header>)
+        : (
+          <>
+            <header className="header">
+              <Link to="/" className="logo-link button-hover">
+                <img className="header__logo" src={logo} alt="логотип" />
               </Link>
-              <Link
-                className="header__button header__button_type_signin button-hover"
-                to="/signin"
-              >
-                Войти
-              </Link>
-            </div>
-          </header>
-        </>
-      )}
+              <div className="header__container">
+                <Link
+                  className="header__button header__button_type_signup button-hover"
+                  to="/signup"
+                >
+                  Регистрация
+                </Link>
+                <Link
+                  className="header__button header__button_type_signin button-hover"
+                  to="/signin"
+                >
+                  Войти
+                </Link>
+              </div>
+            </header>
+          </>
+        )}
     </>
   );
 }

@@ -199,7 +199,7 @@ function App() {
           path="/"
           element={
             <>
-              <Header />
+              <Header loggedIn={isLoggedIn} />
               <Promo />
               <AboutProject />
               <Techs />
