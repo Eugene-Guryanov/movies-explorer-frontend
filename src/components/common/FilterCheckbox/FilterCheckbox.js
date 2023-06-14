@@ -3,7 +3,6 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox({ onChekBox }) {
     const [check, setCheck] = useState(JSON.parse(localStorage.getItem('check')) === true ? JSON.parse(localStorage.getItem('check')) : false)
-    console.log(localStorage.getItem('check'))
     function handleCheckBox(e) {
         setCheck(e.target.checked)
         localStorage.setItem('check', JSON.stringify(e.target.checked))

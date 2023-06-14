@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { CurrentUserContext } from "../../components/contexts/CurrentUserContext";
 
 import "./App.css";
@@ -153,10 +153,26 @@ function App() {
     setLoggedIn(false);
     setCurrentUser({});
   }
-  const array = [];
-  localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
+  // цитата из пункта "Общее": "При поиске текст запроса, найденные фильмы и состояние переключателя короткометражек
+  // сохраняются в хранилище",  поэтому решил сохранить все найденные фильмы  в хранилище
+  // прочитав ваши комментарии у меня сложилось мнение, что поиск на странице "сохраненные фильмы" реализовывать не надо. Но мне кажется, что это мнение ошибочно
+  let savedMovieSerch = savedMovies.filter((movie) => {
+    if (isShort) {
+      if (movie.duration < 40) {
+        return movie.nameRU
+          .toLowerCase()
+          .startsWith(Search.toLowerCase());
+      }
+    }
+    else {
+      return movie.nameRU
+        .toLowerCase()
+        .startsWith((Search).toLowerCase());
+    }
+  });
+  localStorage.setItem('savedMovieSerch', JSON.stringify(savedMovieSerch))
   const filteredMovies = (
-    location.pathname === "/saved-movies" ? (((JSON.parse(localStorage.getItem('filteredMovies')) !== null ? JSON.parse(localStorage.getItem('filteredMovies')) : array).length !== 0 && (JSON.parse(localStorage.getItem('value')) !== null ? JSON.parse(localStorage.getItem('value')) : array).length !== 0) ? JSON.parse(localStorage.getItem('savedMovies')) : savedMovies) : (((JSON.parse(localStorage.getItem('filteredMovies')) !== null ? JSON.parse(localStorage.getItem('filteredMovies')) : array).length !== 0 && (JSON.parse(localStorage.getItem('value')) !== null ? JSON.parse(localStorage.getItem('value')) : array).length !== 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie)
+    (JSON.parse(localStorage.getItem('filteredMovies')) !== null && JSON.parse(localStorage.getItem('filteredMovies')).length > 0 && Search.length > 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie
   ).filter((movie) => {
     if (isShort) {
       if (movie.duration < 40) {
@@ -172,23 +188,14 @@ function App() {
     }
   });
   localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
-  //   const shortMovie = (
-  //  location.pathname === "/saved-movies" ? savedMovies : apiMovie
-  //   ).filter((movie) => {
-  //     if (movie.duration < 40) {
-  //       return movie.nameRU
-  //         .toLocaleLowerCase()
-  //         .includes(Search.toLocaleLowerCase());
-  //     }
-  //   });
 
   const handleCardLike = async (data) => {
     mainApi
       .saveMovie(data)
       .then((res) => {
         const newSavedMovies = [...savedMovies, res];
-
         setSavedMovies(newSavedMovies);
+        localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies))
       })
       .catch((err) => {
         console.log(err);
@@ -201,8 +208,8 @@ function App() {
         const newSavedMovies = savedMovies.filter(
           (m) => m.movieId !== res.movieId
         );
-
         setSavedMovies(newSavedMovies);
+        localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies))
       })
       .catch((err) => {
         console.log(err);
@@ -229,10 +236,9 @@ function App() {
           path="/movies"
           element={
             <ProtectedRoute loggedIn={isLoggedIn}>
-              <Header LoggedIn={isLoggedIn} />
+              <Header loggedIn={isLoggedIn} />
               <SearchForm onChekBox={setShort} onSearchClick={setSearch} pageName={'movies'} />
               <MoviesCardList
-                // filteredMovies={isShort ? shortMovie : filteredMovies}
                 filteredMovies={filteredMovies}
                 savedMovies={savedMovies}
                 handleLikeClick={handleCardLike}
@@ -247,11 +253,10 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute loggedIn={isLoggedIn}>
-              <Header LoggedIn={isLoggedIn} />
+              <Header loggedIn={isLoggedIn} />
               <SearchForm onChekBox={setShort} onSearchClick={setSearch} />
               <MoviesCardList
-                // filteredMovies={isShort ? shortMovie : filteredMovies}
-                filteredMovies={filteredMovies}
+                filteredMovies={savedMovieSerch}
                 handleCardDelete={handleCardDelete}
                 savedMovies={savedMovies}
                 error={error}
@@ -284,7 +289,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute loggedIn={isLoggedIn}>
-              <Header LoggedIn={isLoggedIn} />
+              <Header loggedIn={isLoggedIn} />
               <Profile
                 onUpdateUser={handleUpdateUser}
                 onSignOut={handleSignOut}
