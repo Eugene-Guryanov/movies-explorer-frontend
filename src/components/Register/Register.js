@@ -2,7 +2,6 @@ import { React } from 'react';
 import { Link } from 'react-router-dom';
 import logoPath from '../../images/logo__COLOR_main.svg';
 import { useForm } from "react-hook-form";
-import { NameRegExp } from '../../utils/const';
 import { EmailRegExp } from '../../utils/const';
 import './Register.css';
 
@@ -36,10 +35,7 @@ function Register({ onRegister, serverMessage }) {
               name="name"
               {...(register('name', {
                 required: 'Необходимо ввести имя',
-                pattern: {
-                  value: { NameRegExp },
-                  message: 'Введите валидное имя'
-                }, minLength: { value: '2', message: 'слишком короткое имя' },
+                minLength: { value: '2', message: 'слишком короткое имя' },
                 maxLength: { value: '30', message: 'слишком длинное имя' }
               }))}
             />
@@ -71,8 +67,7 @@ function Register({ onRegister, serverMessage }) {
               name="password"
 
               {...(register('password', {
-                required: 'Необходимо ввести пароль', minLength: { value: "3", message: 'слишком короткий пароль' },
-                maxLength: { value: "50", message: 'слишком длинный пароль' }
+                required: 'Необходимо ввести пароль'
               }))}
             />
             {errors?.password && (<span className="register__error-message register-password-input-error">{errors.password.message}</span>)}

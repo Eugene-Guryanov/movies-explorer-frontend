@@ -2,7 +2,6 @@ import { React, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { NameRegExp } from "../../utils/const";
 import { EmailRegExp } from "../../utils/const";
 import "./Profile.css";
 
@@ -21,7 +20,6 @@ function Profile({ onUpdateUser, onSignOut, message, currentUser }) {
       email: emailValue,
     },
   });
-  console.log(currentUser);
 
   const onSubmit = (data) => {
     onUpdateUser(data);
@@ -48,10 +46,6 @@ function Profile({ onUpdateUser, onSignOut, message, currentUser }) {
               name="profileName"
               {...register("name", {
                 required: "Необходимо ввести имя",
-                pattern: {
-                  value: { NameRegExp },
-                  message: "Введите валидное имя",
-                },
                 minLength: { value: "2", message: "слишком короткое имя" },
                 maxLength: { value: "30", message: "слишком длинное имя" },
                 onChange: (e) => setNameValue(e.target.value),
