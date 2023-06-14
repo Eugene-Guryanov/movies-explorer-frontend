@@ -31,14 +31,13 @@ function App() {
     text: "",
     isError: null,
   });
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [Search, setSearch] = useState("");
+  const [savedMovies, setSavedMovies] = useState(localStorage.getItem('savedMovies') ? JSON.parse(localStorage.getItem('savedMovies')) : []);
+  const [Search, setSearch] = useState(JSON.parse(localStorage.getItem('value')) || "");
   const [isShort, setShort] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
   const path = location.pathname;
   localStorage.setItem('profile', JSON.stringify(currentUser))
-  console.log(currentUser)
   useEffect(() => {
     const token = localStorage.getItem('token');
 
@@ -53,14 +52,10 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+          navigate('/');
         });
     }
   }, []);
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/');
-    }
-  }, [isLoggedIn])
 
   async function fetchData() {
     await Promise.all([moviesApi.getMoviesList()])
@@ -80,11 +75,19 @@ function App() {
       .authorize(data)
       .then((res) => {
         localStorage.setItem("token", res.token);
-        mainApi.getUserInfo().then((userData) => {
-          setCurrentUser(userData);
-          fetchData()
+        mainApi.getUserInfo().then(async (userData) => {
+          mainApi.getSavedMoviesList()
+          .then((data)=>{
+            setSavedMovies(data)
+          })
           setLoggedIn(true);
+          setCurrentUser(userData);
+          await fetchData()
           navigate('/movies')
+        });
+        setServerMessage({
+          text: '',
+          isError: false,
         });
       })
       .catch(async (err) => {
@@ -104,6 +107,10 @@ function App() {
         handleLogin({
           email: data.email,
           password: data.password,
+        });
+        setServerMessage({
+          text: '',
+          isError: false,
         });
       })
       .catch(async (err) => {
@@ -132,8 +139,17 @@ function App() {
     localStorage.removeItem('value');
     localStorage.removeItem('check');
     localStorage.removeItem('movies');
-    localStorage.removeItem('filteredMovies');
     localStorage.removeItem('profile');
+    localStorage.removeItem('filteredMovies');
+    localStorage.removeItem('savedMovieSerch');
+    localStorage.removeItem('savedMovies');
+    setServerMessage({
+      text: '',
+      isError: false,
+    });
+    setSearch('');
+    setError(false);
+    setApiMovie([])
     setLoggedIn(false);
     setCurrentUser({});
   }
