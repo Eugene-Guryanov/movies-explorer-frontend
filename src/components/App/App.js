@@ -247,16 +247,20 @@ function App() {
         <Route
           path="/signup"
           element={
-            <Register
-              onRegister={handleRegister}
-              serverMessage={serverMessage}
-            />
+            <ProtectedRoute loggedIn={!isLoggedIn}>
+              <Register
+                onRegister={handleRegister}
+                serverMessage={serverMessage}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/signin"
           element={
-            <Login onLogin={handleLogin} serverMessage={serverMessage} />
+            <ProtectedRoute loggedIn={!isLoggedIn}>
+              <Login onLogin={handleLogin} serverMessage={serverMessage} />
+            </ProtectedRoute>
           }
         />
         <Route path="*" element={<Page404 />} />
