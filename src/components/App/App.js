@@ -77,9 +77,9 @@ function App() {
         localStorage.setItem("token", res.token);
         mainApi.getUserInfo().then(async (userData) => {
           mainApi.getSavedMoviesList()
-          .then((data)=>{
-            setSavedMovies(data)
-          })
+            .then((data) => {
+              setSavedMovies(data)
+            })
           setLoggedIn(true);
           setCurrentUser(userData);
           await fetchData()
@@ -182,9 +182,10 @@ function App() {
       }
     }
     else {
-      return movie.nameRU
-        .toLowerCase()
-        .startsWith((Search).toLowerCase());
+      let movieRu = String(movie.nameRU).toLowerCase().trim();
+      let movieEn = String(movie.movieEn).toLowerCase().trim();
+      let Request = Search.toLowerCase().trim();
+      return movieRu.indexOf(Request) !== -1 || movieEn.indexOf(Request) !== -1;
     }
   });
   localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
