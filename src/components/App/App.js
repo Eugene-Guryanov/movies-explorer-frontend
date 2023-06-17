@@ -173,8 +173,7 @@ function App() {
     else {
       return findMovies(movie)
     }
-  });
-  localStorage.setItem('savedMovieSerch', JSON.stringify(savedMovieSerch));
+  })
 
   const filteredMovies = (
     (JSON.parse(localStorage.getItem('filteredMovies')) !== null && JSON.parse(localStorage.getItem('filteredMovies')).length > 0 && Search.length > 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie
@@ -185,7 +184,6 @@ function App() {
       }
     }
     else {
-      console.log(movie)
       return findMovies(movie)
     }
   });

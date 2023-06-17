@@ -2,11 +2,24 @@ import "./SearchForm.css";
 import FilterCheckbox from "../../common/FilterCheckbox/FilterCheckbox";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function SearchForm({ onChekBox, onSearchClick }) {
   const { handleSubmit } = useForm({ mode: "onChange" });
   const [isError, setError] = useState(false);
-  const [value, setValue] = useState(JSON.parse(localStorage.getItem('value')) || "");
+  const location = useLocation();
+  const [value, setValue] = useState(location.pathname === '/saved-movies' ? '' : JSON.parse(localStorage.getItem('value')));
+
+
+  useEffect(() => {
+    if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('value'))) {
+      setValue(JSON.parse(localStorage.getItem('value')))
+    } else {
+      setValue('')
+    }
+  }, [location]);
+
   function onSearch() {
     if (value.length === 0) {
       setError(true);
@@ -17,7 +30,12 @@ function SearchForm({ onChekBox, onSearchClick }) {
   }
   function onChange(e) {
     setValue(e.target.value)
-    localStorage.setItem('value', JSON.stringify(e.target.value))
+    if (location.pathname === '/movies') {
+      localStorage.setItem('value', JSON.stringify(value))
+    }
+    else {
+      return;
+    }
   }
 
 
