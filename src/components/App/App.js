@@ -20,6 +20,7 @@ import Page404 from "../Page404/Page404";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
+import { shortDuration } from "../../utils/const"
 
 function App() {
   const navigate = useNavigate();
@@ -156,36 +157,36 @@ function App() {
   // цитата из пункта "Общее": "При поиске текст запроса, найденные фильмы и состояние переключателя короткометражек
   // сохраняются в хранилище",  поэтому решил сохранить все найденные фильмы  в хранилище
   // прочитав ваши комментарии у меня сложилось мнение, что поиск на странице "сохраненные фильмы" реализовывать не надо. Но мне кажется, что это мнение ошибочно
+  function findMovies(movie) {
+    // console.log(movie)
+    let movieRu = String(movie.nameRU).toLowerCase().trim();
+    let movieEn = String(movie.movieEn).toLowerCase().trim();
+    let Request = Search.toLowerCase().trim();
+    return movieRu.indexOf(Request) !== -1 || movieEn.indexOf(Request) !== -1;
+  }
   let savedMovieSerch = savedMovies.filter((movie) => {
     if (isShort) {
-      if (movie.duration < 40) {
-        return movie.nameRU
-          .toLowerCase()
-          .startsWith(Search.toLowerCase());
+      if (movie.duration < shortDuration) {
+        return findMovies(movie)
       }
     }
     else {
-      return movie.nameRU
-        .toLowerCase()
-        .startsWith((Search).toLowerCase());
+      return findMovies(movie)
     }
   });
-  localStorage.setItem('savedMovieSerch', JSON.stringify(savedMovieSerch))
+  localStorage.setItem('savedMovieSerch', JSON.stringify(savedMovieSerch));
+
   const filteredMovies = (
     (JSON.parse(localStorage.getItem('filteredMovies')) !== null && JSON.parse(localStorage.getItem('filteredMovies')).length > 0 && Search.length > 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie
   ).filter((movie) => {
     if (isShort) {
-      if (movie.duration < 40) {
-        return movie.nameRU
-          .toLowerCase()
-          .startsWith(Search.toLowerCase());
+      if (movie.duration < shortDuration) {
+        return findMovies(movie)
       }
     }
     else {
-      let movieRu = String(movie.nameRU).toLowerCase().trim();
-      let movieEn = String(movie.movieEn).toLowerCase().trim();
-      let Request = Search.toLowerCase().trim();
-      return movieRu.indexOf(Request) !== -1 || movieEn.indexOf(Request) !== -1;
+      console.log(movie)
+      return findMovies(movie)
     }
   });
   localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))

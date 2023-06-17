@@ -18,4 +18,5 @@ export const lengthCard = {
     eightCard: 8,
     twelveСard: 12,
     sixteen: 16,
-}
+};
+export const shortDuration = 40;
