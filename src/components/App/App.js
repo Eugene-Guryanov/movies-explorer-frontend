@@ -33,7 +33,7 @@ function App() {
     isError: null,
   });
   const [savedMovies, setSavedMovies] = useState(localStorage.getItem('savedMovies') ? JSON.parse(localStorage.getItem('savedMovies')) : []);
-  const [Search, setSearch] = useState(JSON.parse(localStorage.getItem('value')) || "");
+  const [Search, setSearch] = useState("");
   const [isShort, setShort] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(false);
@@ -70,7 +70,6 @@ function App() {
         setError(true);
       });
   }
-
   function handleLogin(data) {
     mainApi
       .authorize(data)
@@ -80,6 +79,7 @@ function App() {
           mainApi.getSavedMoviesList()
             .then((data) => {
               setSavedMovies(data)
+              localStorage.setItem('savedMovies', JSON.stringify(data))
             })
           setLoggedIn(true);
           setCurrentUser(userData);
@@ -142,7 +142,6 @@ function App() {
     localStorage.removeItem('movies');
     localStorage.removeItem('profile');
     localStorage.removeItem('filteredMovies');
-    localStorage.removeItem('savedMovieSerch');
     localStorage.removeItem('savedMovies');
     setServerMessage({
       text: '',
@@ -154,17 +153,13 @@ function App() {
     setLoggedIn(false);
     setCurrentUser({});
   }
-  // цитата из пункта "Общее": "При поиске текст запроса, найденные фильмы и состояние переключателя короткометражек
-  // сохраняются в хранилище",  поэтому решил сохранить все найденные фильмы  в хранилище
-  // прочитав ваши комментарии у меня сложилось мнение, что поиск на странице "сохраненные фильмы" реализовывать не надо. Но мне кажется, что это мнение ошибочно
   function findMovies(movie) {
-    // console.log(movie)
     let movieRu = String(movie.nameRU).toLowerCase().trim();
     let movieEn = String(movie.movieEn).toLowerCase().trim();
     let Request = Search.toLowerCase().trim();
     return movieRu.indexOf(Request) !== -1 || movieEn.indexOf(Request) !== -1;
   }
-  let savedMovieSerch = savedMovies.filter((movie) => {
+  const savedMovieSerch = savedMovies.filter((movie) => {
     if (isShort) {
       if (movie.duration < shortDuration) {
         return findMovies(movie)
@@ -176,7 +171,7 @@ function App() {
   })
 
   const filteredMovies = (
-    (JSON.parse(localStorage.getItem('filteredMovies')) !== null && JSON.parse(localStorage.getItem('filteredMovies')).length > 0 && Search.length > 0) ? JSON.parse(localStorage.getItem('filteredMovies')) : apiMovie
+    apiMovie
   ).filter((movie) => {
     if (isShort) {
       if (movie.duration < shortDuration) {
@@ -187,7 +182,15 @@ function App() {
       return findMovies(movie)
     }
   });
-  localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
+
+  useEffect(() => {
+    if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('value'))) {
+      localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies))
+      setSearch(JSON.parse(localStorage.getItem('value')))
+    } else {
+      setSearch('')
+    }
+  }, [location])
 
   const handleCardLike = async (data) => {
     mainApi

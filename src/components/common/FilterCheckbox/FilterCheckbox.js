@@ -13,15 +13,15 @@ function FilterCheckbox({ onChekBox }) {
         }
     }
     useEffect(() => {
-        onChekBox(check)
-    }, [check])
-    useEffect(() => {
         if (location.pathname === '/saved-movies' && JSON.parse(localStorage.getItem('check'))) {
             setCheck(false)
         } else {
             setCheck(JSON.parse(localStorage.getItem('check')))
         }
     }, [location])
+    useEffect(() => {
+        onChekBox(check)
+    }, [check])
     return (
         <label className='filter-checkbox'>
             <input type='checkbox' className='filter-checkbox__hidden' checked={check} onChange={handleCheckBox} />

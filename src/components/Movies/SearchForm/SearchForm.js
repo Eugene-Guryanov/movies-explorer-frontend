@@ -9,7 +9,7 @@ function SearchForm({ onChekBox, onSearchClick }) {
   const { handleSubmit } = useForm({ mode: "onChange" });
   const [isError, setError] = useState(false);
   const location = useLocation();
-  const [value, setValue] = useState(location.pathname === '/saved-movies' ? '' : JSON.parse(localStorage.getItem('value')));
+  const [value, setValue] = useState('');
 
 
   useEffect(() => {
@@ -29,9 +29,10 @@ function SearchForm({ onChekBox, onSearchClick }) {
     }
   }
   function onChange(e) {
+
     setValue(e.target.value)
     if (location.pathname === '/movies') {
-      localStorage.setItem('value', JSON.stringify(value))
+      localStorage.setItem('value', JSON.stringify(e.target.value))
     }
     else {
       return;
