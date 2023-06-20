@@ -1,0 +1,132 @@
+.header__logo {
+}
+
+@media screen and (min-width: 1200px) {
+  .header__logo {
+    margin-right: 28px;
+  }
+}
+
+.header {
+  padding: 18px 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Inter", "Arial", sans-serif;
+  background: #f3c1f8;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 25px 30px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding: 21px 70px;
+  }
+}
+
+.header_type_loggedin {
+  background: #ffffff;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.header__button {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 16px;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  background: none;
+  color: #000000;
+}
+
+.header__button_type_signup {
+  border: none;
+  color: #000000;
+}
+
+.header__button_type_signin {
+  background: #000000;
+  border-radius: 3px;
+  color: #ffffff;
+  padding: 5px 12px;
+  border: none;
+}
+
+.header__button_type_account {
+  border: none;
+  border-radius: 15px;
+  padding: 8px 20px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  height: fit-content;
+  text-decoration: none;
+  background: #f9f9f9;
+  border-radius: 20px;
+  color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+  .header__button_type_account {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__button_type_loggedIn {
+    display: none;
+  }
+}
+
+.header__burger {
+  display: block;
+  width: 40px;
+  height: 43px;
+  position: relative;
+}
+
+.header__burger-button {
+  position: absolute;
+  width: 22px;
+  height: 2.5px;
+  background: #000000;
+  bottom: 19px;
+  left: 9px;
+}
+
+@media screen and (min-width: 769px) {
+  .header__burger {
+    display: none;
+  }
+}
+
+.header__burger-button::after {
+  width: 22px;
+  position: absolute;
+  height: 2.5px;
+  background: #000000;
+  transform: translateY(-6.5px);
+  content: "";
+}
+
+.header__burger-button::before {
+  width: 22px;
+  position: absolute;
+  height: 2.5px;
+  background: #000000;
+  transform: translateY(6.5px);
+  content: "";
+}

@@ -1,0 +1,122 @@
+.techs {
+  padding: 70px 14px 0;
+  font-family: "Inter", "Arial", sans-serif;
+
+}
+
+@media screen and (min-width: 580px) {
+  .techs {
+    background: #f5f5f5;
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .techs {
+    padding: 100px 70px;
+  }
+}
+
+.techs__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: auto;
+  margin-top: 60px;
+}
+
+@media screen and (min-width: 580px) {
+  .techs__title {
+    font-size: 50px;
+    line-height: 58px;
+    margin-top: 80px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .techs__title {
+    margin-top: 90px;
+  }
+}
+
+.techs__subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 16px;
+
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 24px auto 0;
+  color: #000000;
+}
+
+@media screen and (min-width: 580px) {
+  .techs__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 22px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .techs__subtitle {
+    font-size: 14px;
+    line-height: 20px;
+    width: 460px;
+    text-align: center;
+    margin-top: 26px;
+  }
+}
+
+.techs__blocks {
+  display: grid;
+  padding: 0%;
+  margin: 50px auto 0;
+  grid-template-columns: 84px 84px;
+  gap: 10px;
+  row-gap: 10px;
+  justify-content: center;
+}
+
+@media screen and (min-width: 580px) {
+  .techs__blocks {
+    grid-template-columns: 84px 84px 84px 84px 84px 84px 84px;
+    margin-top: 83px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .techs__blocks {
+    grid-template-columns: 90px 90px 90px 90px 90px 90px 90px;
+    margin-top: 100px;
+  }
+}
+
+.techs__block {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  list-style: none;
+  color: #000000;
+  background: #e8e8e8;
+  border-radius: 10px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1000px) {
+  .techs__block {
+    height: 60px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

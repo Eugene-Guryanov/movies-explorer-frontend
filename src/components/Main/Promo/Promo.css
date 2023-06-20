@@ -1,0 +1,117 @@
+.promo {
+  background: #f3c1f8;
+  padding: 70px 10px 30px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", "Arial", sans-serif;
+}
+
+@media screen and (min-width: 580px) {
+  .promo {
+    padding: 140px 100px 76px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .promo {
+    flex-direction: row-reverse;
+    gap: 190px;
+    padding: 75px 70px;
+  }
+}
+
+.promo__img {
+  margin: auto;
+}
+
+@media screen and (min-width: 580px) {
+  .promo__img {
+    width: 310px;
+    height: 304px;
+  }
+}
+
+.promo__container {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+@media screen and (min-width: 1200px) {
+  .promo__container {
+    align-items: flex-start;
+  }
+}
+
+.promo__title {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 38px;
+  /* or 127% */
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 44px 0 24px 0;
+}
+
+@media screen and (min-width: 580px) {
+  .promo__title {
+    font-size: 40px;
+    line-height: 50px;
+    margin: 48px 0 22px 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .promo__title {
+    font-size: 50px;
+    line-height: 58px;
+    margin: 0 0 36px 0;
+    text-align: start;
+  }
+}
+
+.promo__subtitle {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #000000;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+  margin: 0 auto 80px;
+  max-width: 260px;
+}
+
+@media screen and (min-width: 1200px) {
+  .promo__subtitle {
+    text-align: start;
+    margin: 0 0 146px;
+  }
+}
+
+.promo__button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  text-align: center;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  transition: color 0.2s ease-in;
+  width: 129px;
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1200px) {
+  .promo__button {
+    margin: 0%;
+  }
+}
